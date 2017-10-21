@@ -1,0 +1,43 @@
+{{include "header"}}
+
+	{{include "nav"}}
+	
+	<!-- 登录表单 -->
+	<div class="container">
+		<form>
+			<!-- 账号 -->
+			<div class="form-group">
+				<input type="text" class="form-control" name="username" required pattern="^[a-zA-Z0-9\u4e00-\u9fa5]{2,10}$" placeholder="请输入账号" />
+			</div>
+			<!-- 密码 -->
+			<div class="form-group">
+				<input type="password" class="form-control" name="password" required pattern="^.{6,16}$" placeholder="请输入密码" />
+			</div>
+			<!-- 登录按钮 -->
+			<input type="submit" class="btn btn-success form-control" value="登录" />
+		</form>
+	</div>
+	
+{{include "footer"}}
+
+<script type="text/javascript">
+	// 发送登录请求
+	$("form").submit(function(event){
+		// 阻止默认事件
+		event.preventDefault();
+		
+		// 获取表单数据，拼接成字符串（不是 formdata 格式）
+		var data = $(this).serialize();
+		
+		// 发送网络请求
+		$.post("/user/login",data,function(resData){
+			$(".modal-body").text(resData.msg);
+			$("#myModal").modal("show").on("hide.bs.modal",function(){
+				// 登录成功之后跳转到首页页面否则还留在本页面继续登录
+				if (resData.code == 1) {
+					location.href = "/";
+				}
+			});
+		});
+	});
+</script>

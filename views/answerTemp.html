@@ -1,0 +1,14 @@
+<div class="media answer">
+	<!-- 第一个内层（头像） -->
+	<div class="pull-right">
+		<a>
+			<img class="media-object" src="uploads/{{username}}.jpg" onerror='this.src="images/user.png"'>
+		</a>	
+	</div>	
+	<!-- 第二个内层（答案、时间、ip） -->
+	<div class="media-body">
+		<h4 class="media-heading">{{username}}</h4>
+		<p>{{content}}</p>
+		<div class="media-bottom">{{time | formatTime}}&#x3000;{{ip | formatIp}}</div>
+	</div>
+</div>

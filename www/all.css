@@ -1,0 +1,41 @@
+body{
+	padding-top: 60px;
+	-moz-user-select: none;
+}
+.tsk{
+	display: none;
+}
+.navbar-title{
+	text-align: center;
+	font-size: 20px;
+	color: #9D9D9D;
+	padding: 15px;
+	line-height: 20px;
+}
+
+.glyphicon{
+	cursor: pointer;
+}
+
+.question{
+	cursor: pointer;
+}
+
+.media-object{
+	width: 64px;
+	height: 64px;
+	border-radius: 50%;
+}
+
+.media-heading{
+	color: goldenrod;
+}
+
+.media-bottom{
+	color: lightgrey;
+}
+
+.answer img{
+	width: 32px;
+	height: 32px;
+}

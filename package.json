@@ -1,0 +1,21 @@
+{
+  "name": "zhiyouquestions",
+  "version": "1.0.0",
+  "description": "智游问答系统",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "智游问答系统，学科分类，学生问题，专业老师回答"
+  ],
+  "author": "zm",
+  "license": "ISC",
+  "dependencies": {
+    "art-template": "^3.1.3",
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.4",
+    "multer": "^1.3.0"
+  }
+}

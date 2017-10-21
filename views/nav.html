@@ -1,0 +1,22 @@
+<!-- 导航栏 -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="row">
+			<div class="navbar-title">
+				<a>
+					<span id="goBack" class="glyphicon glyphicon-chevron-left pull-left"></span>
+				</a>
+				{{title}}
+				{{if title == "登录"}}
+					<a href="/register-page">
+						<span id="register" class="glyphicon glyphicon-plus-sign pull-right"></span>
+					</a>
+				{{else}}	
+					<a href="/">
+						<span id="home" class="glyphicon glyphicon-home pull-right"></span>
+					</a>
+				{{/if}}
+			</div>
+		</div>
+	</div>
+</nav>

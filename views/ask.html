@@ -1,0 +1,15 @@
+{{include "header"}}
+	{{include "nav"}}
+	
+	<!-- 提问表单 -->
+	<div class="container">
+		<form action="/question/ask" method="post">
+			<div class="form-group">
+				<textarea class="form-control" name="content" rows="10" placeholder="请详细描述你提问的内容"></textarea>
+			</div>
+			<input type="submit" class="btn btn-success form-control" value="提问" />
+		</form>
+	</div>
+	
+{{include "footer"}}
+

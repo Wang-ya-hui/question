@@ -1,0 +1,86 @@
+{{include "header"}}
+	
+	<!-- 导航栏 -->
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="row">
+				<!-- 导航栏横幅 -->
+				<a href="#" class="navbar-brand">智游教育</a>
+				<div class="navbar-title pull-right">
+					<!-- 提问图标 -->
+					<a href="/ask-page" style="text-decoration: none;">
+						<span class="glyphicon glyphicon-plus"></span>
+						提问
+					</a>
+					<!-- &#x3000; 是一个汉字的宽度 -->
+					<!-- &nbsp; 是一个 space 的宽度 -->
+					&nbsp;&nbsp;&nbsp;
+					<!-- 用户相关 -->
+					{{if username}}
+						<!-- 用户已登录 -->
+						<span class="glyphicon glyphicon-user dropdown-toggle" data-toggle="dropdown"><span>{{username}}</span></span>
+					{{else}}
+						<!-- 用户没有登录 -->
+						<a href="/login-page">
+							<span class="glyphicon glyphicon-user"></span>
+						</a>
+					{{/if}}
+					<!-- 下拉列表 -->
+					<ul class="dropdown-menu" style="min-width: 100px;">
+						<li class="text-center"><a href="/upload-page">上传头像</a></li>
+						<li class="divider"></li>
+						<li class="text-center"><a href="/user/logout">退出登录</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</nav>
+	
+	<!-- 创建一个容器，展示所有问题 -->
+	<div class="container" id="questions">
+		{{each data as question index}}
+			<!-- 这里采用 bootstrap 里面的 对媒体对象（Media Object） -->
+			<!-- 这是外层（每个问题的父标签） -->
+			<div class="media question" data-time={{question.time | millisecond}}>
+				<!-- 内层第一块（处理用户头像） -->
+				<div class="pull-left">
+					<a>
+						<img class="media-object" src="uploads/{{question.username}}.jpg" onerror='this.src="images/user.png"'>
+					</a>
+				</div>	
+				<!-- 内层第二块（处理提问人、提问内容、时间、ip） -->
+				<div class="media-body">
+					<h4 class="media-heading">{{question.username}}</h4>
+					<p>{{question.content}}</p>
+					<div class="media-bottom">{{question.time | formatTime}}&#x3000;{{question.ip | formatIp}}</div>
+						
+					<!-- 展示所有的答案 -->
+					{{if question.answers}}
+						{{each question.answers as answer index}}
+							{{include "answerTemp" answer}}
+						{{/each}}
+					{{/if}}
+					
+				</div>
+			</div>
+			<hr>
+		{{/each}}
+	</div>
+	
+{{include "footer"}}
+<script src="js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	// 点击某个问题，跳转到回答问题页面(这里得使用代理事件，
+	// 因为绑定事件执行的时候，htmlStr 还没拼接完毕)
+	var username = $.cookie("username");
+	$("#questions").on("click",'.question',function(){
+		if (username) {
+			location.href = "/answer-page";
+			// console.log($(this).data("time"));
+			// 存放到 cookie 中，目的是下次发送请求时带到后台（找到对应问题文件）
+			$.cookie("question",$(this).data("time"));
+		} else{
+			location.href = "/login-page";
+		}
+	});
+</script>
